@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="<?php echo e(app()->getLocale()); ?>">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="<?php echo URL::to('/'); ?>/images/fav.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+    <title><?php echo trans('main.site_name'); ?> - <?php echo $__env->yieldContent('title'); ?></title>
+    <!-- Styles -->
+    <!--link href="<?php echo e(asset('css/app.css')); ?>" rel="stylesheet"-->
+    <?php echo Html::style('css/bootstrap.min.css'); ?>
+
+    <?php echo Html::style('css/bootstrap-datetimepicker.min.css'); ?>
+
+    <?php echo Html::style('css/jquery.dataTables.min.css'); ?>
+
+</head>
+<body>
+    <div id="app">
+        <nav class="navbar navbar-default navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+
+                    <!-- Collapsed Hamburger -->
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+                        <span class="sr-only">Toggle Navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <!-- Branding Image -->
+                    <a class="navbar-brand" href="<?php echo e(url('/')); ?>" title="<?php echo trans('main.site_name'); ?>">
+                        <?php echo trans('main.site_name'); ?> 
+                    </a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                    <!-- Left Side Of Navbar -->
+                    <ul class="nav navbar-nav">
+                        &nbsp;
+                    </ul>
+
+                    <!-- Right Side Of Navbar -->
+                    <ul class="nav navbar-nav navbar-right">
+                        <!-- Authentication Links -->
+                        <?php if(Auth::guest()): ?>
+                            <li><a href="<?php echo e(route('login')); ?>">Login</a></li>                            
+                        <?php else: ?>
+                            <?php if(Auth::user()->user_role == "Administrator"): ?>
+                            
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" title="Team Time Log">
+                                    Team TimeLog<span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="<?php echo e(route('main.teamtimelog.create')); ?>">Add</a></li>
+                                    <li><a href="<?php echo e(route('main.teamtimelog.index')); ?>">List</a></li>
+                                </ul>
+                            </li>
+                            
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" title="Users">
+                                    Users<span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="<?php echo e(route('main.user.create')); ?>">Add</a></li>
+                                    <li><a href="<?php echo e(route('main.user.index')); ?>">List</a></li>
+                                </ul>
+                            </li>                           
+                            
+                            <?php endif; ?>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" title="My TimeLog">
+                                    My TimeLog<span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="<?php echo e(route('main.dailytimelog.create')); ?>">Add</a></li>
+                                    <li><a href="<?php echo e(route('main.dailytimelog.index')); ?>">List</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    <?php echo e(Auth::user()->name); ?> <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="<?php echo e(route('main.user.profileView', array(Auth::user()->id))); ?>">My Account</a></li>
+                                    <li>
+                                        <a href="<?php echo e(route('logout')); ?>"
+                                            onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                            Logout
+                                        </a>
+
+                                        <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
+                                            <?php echo e(csrf_field()); ?>
+
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        <?php endif; ?>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <?php echo $__env->make('common.alert', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+        <?php echo $__env->yieldContent('content'); ?>
+    </div>
+    <!-- Scripts -->
+    <!--script src="<?php echo e(asset('js/app.js')); ?>"></script-->
+    <?php echo Html::script('js/jquery-1.8.3.min.js'); ?>
+
+    <?php echo Html::script('js/bootstrap.min.js'); ?>
+
+    <?php echo Html::script('js/bootstrap-datetimepicker.js'); ?>
+
+    <?php echo Html::script('js/bootstrap-datetimepicker.min.js'); ?>
+
+    <?php echo Html::script('js/jquery.dataTables.min.js'); ?>
+
+    <?php echo $__env->yieldContent('page_js'); ?>
+</body>
+</html>

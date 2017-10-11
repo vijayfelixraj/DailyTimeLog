@@ -1,0 +1,16 @@
+<?php $__env->startSection('title',trans('main.timelog.add')); ?>
+<?php $__env->startSection('header'); ?>
+    <h3><i class="icon-message"></i><?php echo e(trans('main.dailytimelog.title')); ?></h3>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('help'); ?>
+    <p class="lead"><?php echo e(trans('main.dailytimelog.title')); ?></p>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
+    <?php echo Form::open( array('route' => 'main.dailytimelog.store','class'=>'form-vartical', 'accept-charset'=>'utf-8', 'data-toggle' => 'validator')); ?>
+
+	     <?php echo $__env->make('dailytimelog/partials/_form', ['submit_text' => trans('main.save') ,'btn'=> trans('main.save')], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    <?php echo Form::close(); ?>
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

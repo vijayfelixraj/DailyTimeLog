@@ -1,0 +1,78 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading"><?php echo e(trans('main.user.title')); ?></div>
+                    <div class="panel-body">
+                        <?php if(session('status')): ?>
+                            <div class="alert alert-success">
+                                <?php echo e(session('status')); ?>
+
+                            </div>
+                        <?php endif; ?>
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="control-label col-md-2">Username</label>
+                                <div class="col-md-6">
+                                    <?php echo Form::text('name', @$user->name, array('class'=>'form-control', 'placeholder' => 'Enter Username', 'tabindex' => '1')); ?>
+
+                                    <!--span class="help-inline">Minimum 5 Characters</span-->
+                                    <?php if($errors->has('name')): ?>
+                                        <span class="help-block">
+                                            <strong><?php echo e($errors->first('name')); ?></strong>
+                                        </span>
+                                    <?php endif; ?>
+                                </div>
+                                <div class="controls col-md-4">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="basicinput">Email</label>
+                                <div class="controls col-md-6">
+                                    <?php echo Form::email('email', @$user->email, array('class'=>'form-control', 'tabindex' => '2', 'id' => 'email', 'placeholder' => 'Enter Email')); ?>
+
+                                    <?php if($errors->has('email')): ?>
+                                        <span class="help-block">
+                                            <strong><?php echo e($errors->first('email')); ?></strong>
+                                        </span>
+                                    <?php endif; ?>
+                                </div>
+                                <div class="controls col-md-4">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="basicinput">Password</label>
+                                <div class="controls col-md-6">  
+                                    <?php echo e(Form::password('password', array('class' => 'form-control', 'tabindex' => '3', 'placeholder' => 'Enter Password'))); ?>
+
+                                    <?php if($errors->has('password')): ?>
+                                        <span class="help-block">
+                                            <strong><?php echo e($errors->first('password')); ?></strong>
+                                        </span>
+                                    <?php endif; ?>
+                                </div>
+                                <div class="controls col-md-4">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="basicinput">User Role</label>
+                                <div class="controls col-md-6">
+                                    <?php echo Form::select('user_role', ['User'=> 'User'],@$user->user_role, array('class'=>'form-control', 'id'=> 'user_role', 'tabindex' => '5')); ?>
+
+                                </div>
+                                <div class="controls col-md-4">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="basicinput"></label>
+                                <div class="controls col-md-10">
+                                    <button type="submit" class="btn btn-primary" tabindex="7"><?php echo e(@$btn); ?></button>
+                                    <a href="<?php echo route('main.user.index'); ?>" class="btn btn-default" tabidex='8'><?php echo trans('main.cancel'); ?></a>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
